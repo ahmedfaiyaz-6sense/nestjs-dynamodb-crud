@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { CreateNoteDTO } from './dto/createNote.dto';
 import { UpdateNoteDTO } from './dto/updateNote.dto';
 import { NoteIdDTO } from './dto/noteid.dto';
+import { PopulateAmountDTO } from './dto/populateAmount.dto';
+import { faker } from '@faker-js/faker';
 @Injectable()
 export class NoteService {
   constructor(
@@ -45,5 +47,18 @@ export class NoteService {
 
   getAll() {
     return this.noteModel.scan().exec();
+  }
+
+  async populate(amount: PopulateAmountDTO) {
+    const batch_notes = [];
+    for (let i = 0; i < amount.amount; i++) {
+      batch_notes.push({
+        id: uuidv4(),
+        title: faker.word.adjective(),
+        content: faker.lorem.paragraph(),
+      });
+    }
+
+    return await this.noteModel.batchPut(batch_notes);
   }
 }

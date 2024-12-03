@@ -11,6 +11,7 @@ import { NoteService } from './note.service';
 import { CreateNoteDTO } from './dto/createNote.dto';
 import { UpdateNoteDTO } from './dto/updateNote.dto';
 import { NoteIdDTO } from './dto/noteid.dto';
+import { PopulateAmountDTO } from './dto/populateAmount.dto';
 
 @Controller('note')
 export class NoteController {
@@ -19,6 +20,14 @@ export class NoteController {
   @Post()
   create(@Body() createNote: CreateNoteDTO) {
     return this.noteService.create(createNote);
+  }
+  @Get('/all')
+  getAll() {
+    return this.noteService.getAll();
+  }
+  @Post('/populate')
+  populate(@Body() amount: PopulateAmountDTO) {
+    return this.noteService.populate(amount);
   }
 
   @Put(':id')
@@ -34,8 +43,5 @@ export class NoteController {
   getById(@Param() noteId: NoteIdDTO) {
     return this.noteService.findbyId(noteId);
   }
-  @Get('/all')
-  getAll() {
-    return this.noteService.getAll();
-  }
+  
 }
