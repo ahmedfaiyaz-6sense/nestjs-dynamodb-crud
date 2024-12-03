@@ -7,6 +7,9 @@ export const NoteSchema = new Schema({
   },
   title: {
     type: String,
+    index: {
+      name: 'TitleIndex',
+    },
   },
   content: {
     type: String,

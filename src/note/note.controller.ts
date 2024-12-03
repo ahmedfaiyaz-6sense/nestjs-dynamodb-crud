@@ -12,6 +12,8 @@ import { CreateNoteDTO } from './dto/createNote.dto';
 import { UpdateNoteDTO } from './dto/updateNote.dto';
 import { NoteIdDTO } from './dto/noteid.dto';
 import { PopulateAmountDTO } from './dto/populateAmount.dto';
+import { FilterNoteDTO } from './dto/filterNote.dto';
+import { ApiParam } from '@nestjs/swagger';
 
 @Controller('note')
 export class NoteController {
@@ -29,7 +31,15 @@ export class NoteController {
   populate(@Body() amount: PopulateAmountDTO) {
     return this.noteService.populate(amount);
   }
-
+  @Get('/filter/:text')
+  @ApiParam({
+    name: 'text',
+    type: String,
+    description: 'Filter text for the notes',
+  })
+  searchNote(@Param() filterNote: FilterNoteDTO) {
+    return this.noteService.filter(filterNote);
+  }
   @Put(':id')
   update(@Param() noteId: NoteIdDTO, @Body() updateNote: UpdateNoteDTO) {
     return this.noteService.update(noteId, updateNote);
@@ -43,5 +53,4 @@ export class NoteController {
   getById(@Param() noteId: NoteIdDTO) {
     return this.noteService.findbyId(noteId);
   }
-  
 }

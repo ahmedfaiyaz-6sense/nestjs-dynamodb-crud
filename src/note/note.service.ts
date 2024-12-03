@@ -7,6 +7,7 @@ import { UpdateNoteDTO } from './dto/updateNote.dto';
 import { NoteIdDTO } from './dto/noteid.dto';
 import { PopulateAmountDTO } from './dto/populateAmount.dto';
 import { faker } from '@faker-js/faker';
+import { FilterNoteDTO } from './dto/filterNote.dto';
 @Injectable()
 export class NoteService {
   constructor(
@@ -60,5 +61,15 @@ export class NoteService {
     }
 
     return await this.noteModel.batchPut(batch_notes);
+  }
+
+  async filter(filterNote: FilterNoteDTO) {
+    const { text } = filterNote;
+   // console.log('Text to be searched: ' + text);
+    return await this.noteModel
+      .query('title')
+      .eq(text)
+      .using('TitleIndex')
+      .exec();
   }
 }
