@@ -72,4 +72,8 @@ export class NoteService {
       .using('TitleIndex')
       .exec();
   }
+  async search(filterNote: FilterNoteDTO) {
+    const { text } = filterNote;
+    return this.noteModel.scan('content').contains(text).exec();
+  }
 }

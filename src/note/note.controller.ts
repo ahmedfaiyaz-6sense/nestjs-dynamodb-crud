@@ -38,9 +38,12 @@ export class NoteController {
     type: String,
     description: 'Filter text for the notes',
   })*/
-  searchNote(@Query() filterNote: FilterNoteDTO) {
-    console.log(filterNote);
+  filterNote(@Query() filterNote: FilterNoteDTO) {
     return this.noteService.filter(filterNote);
+  }
+  @Get('/search')
+  searchNote(@Query() filterNote: FilterNoteDTO) {
+    return this.noteService.search(filterNote);
   }
   @Put(':id')
   update(@Param() noteId: NoteIdDTO, @Body() updateNote: UpdateNoteDTO) {
