@@ -65,7 +65,7 @@ export class NoteService {
 
   async filter(filterNote: FilterNoteDTO) {
     const { text } = filterNote;
-   // console.log('Text to be searched: ' + text);
+    // console.log('Text to be searched: ' + text);
     return await this.noteModel
       .query('title')
       .eq(text)

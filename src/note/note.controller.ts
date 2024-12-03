@@ -6,6 +6,7 @@ import {
   Delete,
   Param,
   Put,
+  Query,
 } from '@nestjs/common';
 import { NoteService } from './note.service';
 import { CreateNoteDTO } from './dto/createNote.dto';
@@ -13,7 +14,7 @@ import { UpdateNoteDTO } from './dto/updateNote.dto';
 import { NoteIdDTO } from './dto/noteid.dto';
 import { PopulateAmountDTO } from './dto/populateAmount.dto';
 import { FilterNoteDTO } from './dto/filterNote.dto';
-import { ApiParam } from '@nestjs/swagger';
+//import { ApiParam } from '@nestjs/swagger';
 
 @Controller('note')
 export class NoteController {
@@ -31,13 +32,14 @@ export class NoteController {
   populate(@Body() amount: PopulateAmountDTO) {
     return this.noteService.populate(amount);
   }
-  @Get('/filter/:text')
-  @ApiParam({
+  @Get('/filter')
+  /* @ApiParam({
     name: 'text',
     type: String,
     description: 'Filter text for the notes',
-  })
-  searchNote(@Param() filterNote: FilterNoteDTO) {
+  })*/
+  searchNote(@Query() filterNote: FilterNoteDTO) {
+    console.log(filterNote);
     return this.noteService.filter(filterNote);
   }
   @Put(':id')
