@@ -1,15 +1,14 @@
-import { IsNotEmpty, MinLength, IsUUID } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, MinLength } from 'class-validator';
 
 export class UpdateNoteDTO {
-  @IsUUID(4)
-  id: string;
   @IsNotEmpty()
-  //@ApiProperty()
+  @ApiProperty()
   @MinLength(3)
   title: string;
 
   @IsNotEmpty()
   @MinLength(1)
-  //@ApiProperty()
+  @ApiProperty()
   content: string;
 }

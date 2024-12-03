@@ -1,13 +1,14 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, MinLength } from 'class-validator';
 
 export class CreateNoteDTO {
   @IsNotEmpty()
-  //@ApiProperty()
+  @ApiProperty()
   @MinLength(3)
   title: string;
 
   @IsNotEmpty()
   @MinLength(1)
-  //@ApiProperty()
+  @ApiProperty()
   content: string;
 }

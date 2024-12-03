@@ -21,9 +21,14 @@ export class NoteService {
 
     return await this.noteModel.create(note);
   }
-  async update(updateNote: UpdateNoteDTO) {
+  async update(noteId: NoteIdDTO, updateNote: UpdateNoteDTO) {
     //const { id, title, content } = updateNote;
-    return await this.noteModel.update(updateNote);
+    const note = {
+      id: noteId.id,
+      title: updateNote.title,
+      content: updateNote.content,
+    };
+    return await this.noteModel.update(note);
   }
   async findbyId(noteId: NoteIdDTO) {
     const note = await this.noteModel.get(noteId);
