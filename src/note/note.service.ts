@@ -3,6 +3,7 @@ import { InjectModel, Model } from 'nestjs-dynamoose';
 import { Note, NoteKey } from './note.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateNoteDTO } from './dto/createNote.dto';
+import { UpdateNoteDTO } from './dto/updateNote.dto';
 @Injectable()
 export class NoteService {
   constructor(
@@ -18,5 +19,9 @@ export class NoteService {
     };
 
     return this.noteModel.create(note);
+  }
+  update(updateNote: UpdateNoteDTO) {
+    //const { id, title, content } = updateNote;
+    return this.noteModel.update(updateNote);
   }
 }
