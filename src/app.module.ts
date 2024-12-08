@@ -3,6 +3,7 @@ import { NoteModule } from './note/note.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 //import { aws } from 'dynamoose';
+import { AppGateway } from './app.gateway';
 //aws.ddb.local('http://localhost:8000');
 /*const ddb = new aws.ddb.DynamoDB({
   endpoint: 'http://localhost:8000', // Specify the local DynamoDB endpoint
@@ -27,5 +28,6 @@ import { ConfigModule } from '@nestjs/config';
 
     NoteModule,
   ],
+  providers: [AppGateway],
 })
 export class AppModule {}
